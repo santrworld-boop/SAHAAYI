@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AI Productivity Assistant</title>
+
+    <!-- 🪄 PWA manifest + theme color -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0078ff">
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-left">
+            <h1>🧠 AI Productivity Assistant</h1>
+            <p class="subtitle">Plan smart. Focus better. Achieve more.</p>
+        </div>
+        <div class="header-right">
+            <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">🌗</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="card task-card">
+            <h2>🗒️ Task Manager</h2>
+
+            <form id="taskForm" class="input-area" onsubmit="return false;">
+                <input id="taskInput" type="text" placeholder="Enter a new task..." autocomplete="off" />
+                <select id="prioritySelect" aria-label="Priority">
+                    <option value="low">🟢 Less Important</option>
+                    <option value="medium">🟡 Important</option>
+                    <option value="high">🔴 High Priority</option>
+                </select>
+                <button id="addTaskBtn" class="primary">Add</button>
+            </form>
+
+            <ul id="taskList" class="task-list" aria-live="polite"></ul>
+
+            <div class="task-summary">
+                <div>✅ Completed: <span id="completedCount">0</span></div>
+                <div>⏳ Pending: <span id="pendingCount">0</span></div>
+            </div>
+        </section>
+
+        <section class="card timer-card">
+            <h2>⏱️ Pomodoro Timer</h2>
+
+            <div class="progress-ring">
+                <svg width="140" height="140" viewBox="0 0 140 140" aria-hidden="true">
+                    <circle class="progress-ring-bg" cx="70" cy="70" r="60"></circle>
+                    <circle class="progress-ring-bar" cx="70" cy="70" r="60"></circle>
+                </svg>
+                <div id="timerDisplay" class="timer-display">25:00</div>
+            </div>
+
+            <div class="timer-controls">
+                <button id="startBtn">Start</button>
+                <button id="pauseBtn">Pause</button>
+                <button id="resetBtn">Reset</button>
+            </div>
+
+            <p class="quote">"Stay focused and never give up."<br>— AI Assistant</p>
+        </section>
+    </main>
+
+    <section class="card planner-card">
+        <h2>📅 Smart Daily Planner</h2>
+        <div class="planner-actions">
+            <button id="generatePlanBtn" class="primary">🧠 Generate Plan</button>
+        </div>
+        <div id="planOutput" class="plan-output">🎉 All tasks completed! Enjoy your day.</div>
+    </section>
+
+    <footer class="site-footer">Made with 💙 by Partner & AI</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

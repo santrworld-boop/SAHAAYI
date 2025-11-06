@@ -1,0 +1,259 @@
+/* ---------- Reset-ish ---------- */
+* { box-sizing: border-box; }
+html,body { height: 100%; margin: 0; padding: 0; }
+
+/* ---------- Theme & Base ---------- */
+:root{
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --text: #222;
+    --muted: #666;
+    --primary: #0078ff;
+    --success: #28a745;
+    --danger: #dc3545;
+    --warning: #ffcc00;
+    --glass: rgba(0,0,0,0.04);
+}
+
+body {
+    font-family: "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px;
+    gap: 18px;
+    transition: background .25s, color .25s;
+    min-height: 100vh;
+}
+
+/* dark theme */
+.dark {
+    --bg: #0f1113;
+    --card: #17181a;
+    --text: #e9eef6;
+    --muted: #aab3c0;
+    --glass: rgba(255,255,255,0.03);
+}
+
+/* ---------- Header ---------- */
+.site-header {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-left h1 { margin: 0; font-size: 1.6rem; }
+.subtitle { margin: 4px 0 0 0; color: var(--muted); font-size: .95rem; }
+
+/* ---------- Buttons ---------- */
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 8px 12px;
+    background: var(--glass);
+    color: inherit;
+    cursor: pointer;
+    transition: transform .12s ease, background .12s;
+    font-size: 0.95rem;
+}
+
+button:hover { transform: translateY(-2px); }
+
+.primary {
+    background: linear-gradient(180deg, var(--primary), #005ecc);
+    color: white;
+}
+
+/* icon button */
+.icon-btn { background: transparent; font-size: 1.25rem; padding: 6px; }
+
+/* ---------- Container & Cards ---------- */
+.container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap; 
+}
+
+/* Card base */
+.card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 6px 18px rgba(20,20,30,0.06);
+    flex: 1; 
+    min-width: 320px; 
+    max-width: 540px; 
+}
+
+/* task card - takes more space */
+.task-card {
+    flex: 1.5; 
+    max-width: 600px;
+}
+
+/* timer card - made more compact and centered */
+.timer-card {
+    flex: 1; 
+    min-width: 250px;
+    max-width: 380px; 
+    text-align: center; 
+}
+.timer-card h2, .timer-card .quote {
+    text-align: left; 
+}
+
+/* planner card spans full width */
+.planner-card { 
+    width: 100%; 
+    max-width: 1100px; 
+    flex: 0 0 100%; 
+}
+
+/* ---------- Task Input Row (Includes Priority Select Fix for Dark Mode) ---------- */
+.input-area {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#taskInput {
+    flex: 1 1 0;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.08);
+    font-size: 0.95rem;
+    background: transparent;
+    color: inherit;
+}
+
+#prioritySelect {
+    min-width: 130px; 
+    max-width: 200px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: transparent;
+    color: var(--text); 
+}
+
+/* Dark Mode Input/Select Fix */
+.dark #taskInput, .dark #prioritySelect {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text); 
+}
+
+.dark #prioritySelect option {
+    background-color: var(--card); 
+    color: var(--text); 
+}
+
+/* ---------- Task list ---------- */
+.task-list {
+    margin: 14px 0 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 320px;
+    overflow: auto;
+}
+
+.task-list li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.01), transparent);
+    border-left: 6px solid transparent;
+}
+
+/* text area and controls */
+.task-text {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.task-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* priority left border visuals */
+.low    { border-left-color: #28a745; }
+.medium { border-left-color: #ffcc00; }
+.high { border-left-color: #ff4d4d; }
+
+/* completed styling */
+.completed .task-text { text-decoration: line-through; opacity: .65; color: var(--muted); }
+
+/* inside task buttons */
+.task-meta button {
+    padding: 6px 8px;
+    border-radius: 8px;
+    min-width: 36px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* done/delete color */
+.done-btn { background: var(--success); color: #fff; }
+.delete-btn { background: var(--danger); color: #fff; }
+
+/* ---------- Timer ---------- */
+.progress-ring { 
+    position: relative; 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin: 14px 0; 
+}
+.progress-ring svg { display: block; }
+.progress-ring-bg { fill: none; stroke: rgba(0,0,0,0.06); stroke-width: 8; }
+.progress-ring-bar { fill: none; stroke: var(--primary); stroke-width: 8; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset .2s linear; }
+
+.timer-display { position: absolute; font-weight: 700; font-size: 1.25rem; }
+
+.timer-controls { 
+    display: flex; 
+    gap: 8px; 
+    margin-top: 8px; 
+    justify-content: center; 
+}
+
+/* ---------- Planner ---------- */
+.planner-actions { margin-top: 8px; }
+.plan-output { margin-top: 12px; padding: 12px; border-radius: 10px; background: var(--glass); }
+
+/* ---------- Footer ---------- */
+.site-footer { color: var(--muted); margin: 6px 0 24px 0; font-size: 0.95rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) { 
+    .container { 
+        flex-direction: column; 
+        align-items: center;
+    }
+    .card { 
+        flex: 1; 
+        width: 100%; 
+        max-width: 640px; 
+    }
+    .task-card, .timer-card {
+        max-width: 640px; 
+    }
+}
